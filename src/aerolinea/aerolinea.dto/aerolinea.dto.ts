@@ -16,7 +16,6 @@ export class AerolineaDto {
  
  @IsString()
  @IsNotEmpty()
- readonly paginaWeb: Date;
+ readonly paginaWeb: string;
  
 }
-/* archivo: src/museum/museum.dto.ts */

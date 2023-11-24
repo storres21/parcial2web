@@ -10,4 +10,4 @@ import { AerolineaAeropuertoController } from './aerolinea-aeropuerto.controller
   imports: [TypeOrmModule.forFeature([AerolineaEntity, AeropuertoEntity])],
   controllers: [AerolineaAeropuertoController],
 })
-export class MuseumArtworkModule {}
+export class AerolineaAeropuertoModule {}

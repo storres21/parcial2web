@@ -8,6 +8,7 @@ import { AerolineaEntity } from './aerolinea/aerolinea.entity';
 import { AeropuertoEntity } from './aeropuerto/aeropuerto.entity';
 import { AerolineaAeropuertoModule } from './aerolinea-aeropuerto/aerolinea-aeropuerto.module';
 
+
 @Module({
   imports: [AerolineaModule, AeropuertoModule,
     TypeOrmModule.forRoot({
@@ -16,7 +17,7 @@ import { AerolineaAeropuertoModule } from './aerolinea-aeropuerto/aerolinea-aero
       port: 5432,
       username: 'postgres',
       password: 'postgres',
-      database: 'postgres',
+      database: 'aeropuerto',
       entities: [AerolineaEntity, AeropuertoEntity],
       dropSchema: true,
       synchronize: true,

@@ -5,7 +5,7 @@ import { AeropuertoDto } from './aeropuerto.dto/aeropuerto.dto';
 import { AeropuertoEntity } from './aeropuerto.entity';
 import { AeropuertoService } from './aeropuerto.service';
 
-@Controller('aeropuertoes')
+@Controller('aeropuertos')
 @UseInterceptors(BusinessErrorsInterceptor)
 export class AeropuertoController {
     constructor(private readonly aeropuertoService: AeropuertoService) {}

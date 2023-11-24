@@ -19,4 +19,3 @@ export class AeropuertoDto {
  readonly ciudad: string;
  
 }
-/* archivo: src/museum/museum.dto.ts */
