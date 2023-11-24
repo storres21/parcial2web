@@ -15,7 +15,7 @@ export class AlbumEntity {
     caratula: string;
 
     @Column() 
-    fechaLanzamiento: string;
+    fechaLanzamiento: Date;
 
     @Column()
     descripcion: string;
