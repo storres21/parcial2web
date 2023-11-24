@@ -17,7 +17,6 @@ export class PerformerEntity {
     descripcion: string;
 
     @ManyToMany(() => AlbumEntity, album => album.performers)
-    @JoinTable()
     albums: AlbumEntity[];
 
 

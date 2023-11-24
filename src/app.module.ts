@@ -6,6 +6,10 @@ import { AlbumModule } from './album/album.module';
 import { TrackModule } from './track/track.module';
 import { PerformerModule } from './performer/performer.module';
 import { AlbumPerformerModule } from './album-performer/album-performer.module';
+import { AlbumEntity } from './album/album.entity';
+import { PerformerEntity } from './performer/performer.entity';
+import { TrackEntity } from './track/track.entity';
+
 
 
 @Module({
@@ -23,9 +27,9 @@ import { AlbumPerformerModule } from './album-performer/album-performer.module';
       keepConnectionAlive: true
     }),
     // AerolineaAeropuertoModule,
-    AlbumModule,
-    TrackModule,
-    PerformerModule,
+    // AlbumModule,
+    // TrackModule,
+    // PerformerModule,
     AlbumPerformerModule,
 
   

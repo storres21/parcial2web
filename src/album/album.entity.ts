@@ -20,12 +20,12 @@ export class AlbumEntity {
     @Column()
     descripcion: string;
 
-    @OneToMany(() => TrackEntity, track => track.album)
-    tracks: TrackEntity[];
-
     @ManyToMany(() => PerformerEntity, performer => performer.albums)
     @JoinTable()
     performers: PerformerEntity[];
+
+    @OneToMany(() => TrackEntity, track => track.album)
+    tracks: TrackEntity[];
 
 
 }

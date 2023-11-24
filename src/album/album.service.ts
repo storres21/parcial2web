@@ -31,7 +31,28 @@ export class AlbumService {
 
     // Continuar con la creación del álbum si pasa la validación
     return await this.albumRepository.save(album);
-}
+    }
+
+    async update(id: string, album: AlbumEntity): Promise<AlbumEntity> {
+        const persistedAlbum: AlbumEntity = await this.albumRepository.findOne({where:{id}});
+        if (!persistedAlbum)
+          throw new BusinessLogicException("The album with the given id was not found", BusinessError.NOT_FOUND);
+        album.id = id; 
+        return await this.albumRepository.save(album);
+    }
+    
+    async delete(id: string) {
+        const album: AlbumEntity = await this.albumRepository.findOne({where:{id}});
+        if (!album)
+          throw new BusinessLogicException("The album with the given id was not found", BusinessError.NOT_FOUND);
+
+        // Verifica si el álbum tiene pistas asociadas
+        if (album.tracks && album.tracks.length > 0) {
+            throw new BusinessLogicException("Cannot delete the album because it has associated tracks", BusinessError.INVALID_OPERATION);
+        }
+     
+        await this.albumRepository.remove(album);
+    }
 
 
 
