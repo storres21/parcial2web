@@ -28,7 +28,7 @@ describe('AeropuertoService', () => {
   for(let i = 0; i < 5; i++){
       const aeropuerto: AeropuertoEntity = await repository.save({
       nombre: faker.lorem.sentence(), 
-      codigo: faker.lorem.sentence(), 
+      codigo: "123", 
       pais: faker.lorem.sentence(), 
       ciudad: faker.lorem.sentence()})
       aeropuertosList.push(aeropuerto);
@@ -63,7 +63,7 @@ it('create should return a new aeropuerto', async () => {
   const aeropuerto: AeropuertoEntity = {
     id: "",
     nombre: faker.lorem.sentence(), 
-    codigo: faker.lorem.sentence(), 
+    codigo: "123", 
     pais: faker.lorem.sentence(), 
     ciudad: faker.lorem.sentence(), 
     aerolineas: []
@@ -83,7 +83,7 @@ it('create should return a new aeropuerto', async () => {
 it('update should modify a aeropuerto', async () => {
   const aeropuerto: AeropuertoEntity = aeropuertosList[0];
   aeropuerto.nombre = "Nuevo nombre";
-  aeropuerto.codigo = "Nuevo codigo";
+  aeropuerto.codigo = "123";
 
   const updatedAeropuerto: AeropuertoEntity = await service.update(aeropuerto.id, aeropuerto);
   expect(updatedAeropuerto).not.toBeNull();

@@ -25,7 +25,7 @@ export class AeropuertoService {
   
    async create(aeropuerto: AeropuertoEntity): Promise<AeropuertoEntity> {
     // Validar que el código del aeropuerto tenga tres caracteres
-    if (aeropuerto.codigo.length !== 3) {
+    if (aeropuerto.codigo.length != 3) {
         throw new BusinessLogicException("El código del aeropuerto debe tener exactamente tres caracteres.", BusinessError.VALIDATION_ERROR);
     }
 
@@ -38,7 +38,7 @@ export class AeropuertoService {
          throw new BusinessLogicException("The aeropuerto with the given id was not found", BusinessError.NOT_FOUND);
       
        // Validar que el código del aeropuerto tenga tres caracteres
-       if (aeropuerto.codigo.length !== 3) {
+       if (aeropuerto.codigo.length != 3) {
         throw new BusinessLogicException("El código del aeropuerto debe tener exactamente tres caracteres.", BusinessError.VALIDATION_ERROR);
     }
 

@@ -28,9 +28,9 @@ describe('AerolineaService', () => {
   for(let i = 0; i < 5; i++){
       const aerolinea: AerolineaEntity = await repository.save({
       nombre: faker.lorem.sentence(), 
-      codigo: faker.lorem.sentence(), 
-      pais: faker.lorem.sentence(), 
-      ciudad: faker.lorem.sentence()})
+      descripcion: faker.lorem.sentence(), 
+      fechaFundacion: faker.date.past(),  
+      paginaWeb: faker.lorem.sentence()})
       aerolineasList.push(aerolinea);
   }
 }
