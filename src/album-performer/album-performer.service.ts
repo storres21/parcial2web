@@ -23,6 +23,11 @@ export class AlbumPerformerService {
        const album: AlbumEntity = await this.albumRepository.findOne({where: {id: albumId}, relations: ["performers"]});
        if (!album)
          throw new BusinessLogicException("The album with the given id was not found", BusinessError.NOT_FOUND);
+
+        
+        if (album.performers && album.performers.length >= 3) {
+            throw new BusinessLogicException("The album already has the maximum number of performers allowed", BusinessError.VALIDATION_ERROR);
+        }
    
        album.performers = [...album.performers, performer];
        return await this.albumRepository.save(album);

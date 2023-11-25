@@ -64,7 +64,7 @@ it('create should return a new performer', async () => {
     id: "",
     nombre: faker.lorem.sentence(), 
     imagen: faker.lorem.sentence(),
-    descripcion: faker.lorem.sentence(),
+    descripcion: faker.string.alphanumeric(10),
     albums: []
   }
 
@@ -78,11 +78,22 @@ it('create should return a new performer', async () => {
   expect(storedPerformer.descripcion).toEqual(newPerformer.descripcion)
 });
 
+it('create should throw an exception for an invalid performer', async () => {
+  const performer: PerformerEntity = {
+    id: "",
+    nombre: faker.lorem.sentence(), 
+    imagen: faker.lorem.sentence(),
+    descripcion: faker.string.alphanumeric(101),
+    albums: []
+  }
+  await expect(() => service.create(performer)).rejects.toHaveProperty("message", "The performer's description must be less than 100 characters")
+});
+
 it('update should modify a performer', async () => {
   const performer: PerformerEntity = performersList[0];
   performer.nombre = "Nuevo nombre";
   performer.imagen = faker.lorem.sentence();
-  performer.descripcion = faker.lorem.sentence();
+  performer.descripcion = faker.string.alphanumeric(100);
 
   const updatedPerformer: PerformerEntity = await service.update(performer.id, performer);
   expect(updatedPerformer).not.toBeNull();

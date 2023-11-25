@@ -35,18 +35,18 @@ describe('AlbumPerformerService', () => {
     performersList = [];
     for(let i = 0; i < 5; i++){
         const performer: PerformerEntity = await performerRepository.save({
-          nombre: faker.lorem.word(),
+          nombre: faker.lorem.sentence(),
           descripcion: faker.lorem.sentence(),
-          imagen: faker.image.url(),
+          imagen: faker.lorem.sentence(),
         })
         performersList.push(performer);
     }
 
     album = await albumRepository.save({
-      nombre: faker.lorem.word(),
+      nombre: faker.lorem.sentence(),
       descripcion: faker.lorem.sentence(),
       fechaLanzamiento: faker.date.past(),
-      caratula: faker.image.url(),
+      caratula: faker.lorem.sentence(),
       performers: performersList
     })
   }
@@ -57,17 +57,17 @@ describe('AlbumPerformerService', () => {
 
   it('addPerformerAlbum should add an performer to a album', async () => {
     const newPerformer: PerformerEntity = await performerRepository.save({
-      nombre: faker.lorem.word(),
+      nombre: faker.lorem.sentence(),
       descripcion: faker.lorem.sentence(),
-      imagen: faker.image.url(),
+      imagen: faker.lorem.sentence(),
     });
     
 
     const newAlbum: AlbumEntity = await albumRepository.save({
-      nombre: faker.lorem.word(),
+      nombre: faker.lorem.sentence(),
       descripcion: faker.lorem.sentence(),
       fechaLanzamiento: faker.date.past(),
-      caratula: faker.image.url(),
+      caratula: faker.lorem.sentence(),
     });
 
 
@@ -83,10 +83,10 @@ describe('AlbumPerformerService', () => {
 
   it('addPerformerAlbum should thrown exception for an invalid performer', async () => {
     const newAlbum: AlbumEntity = await albumRepository.save({
-      nombre: faker.lorem.word(),
+      nombre: faker.lorem.sentence(),
       descripcion: faker.lorem.sentence(),
       fechaLanzamiento: faker.date.past(),
-      caratula: faker.image.url(),
+      caratula: faker.lorem.sentence(),
     })
 
     await expect(() => service.addPerformerAlbum(newAlbum.id, "0")).rejects.toHaveProperty("message", "The performer with the given id was not found");
@@ -94,13 +94,56 @@ describe('AlbumPerformerService', () => {
 
   it('addPerformerAlbum should throw an exception for an invalid album', async () => {
     const newPerformer: PerformerEntity = await performerRepository.save({
-      nombre: faker.lorem.word(),
+      nombre: faker.lorem.sentence(),
       descripcion: faker.lorem.sentence(),
-      imagen: faker.image.url(),
+      imagen: faker.lorem.sentence(),
     });
 
     await expect(() => service.addPerformerAlbum("0", newPerformer.id)).rejects.toHaveProperty("message", "The album with the given id was not found");
   });
+
+  it('addPerformerAlbum should throw an exception when trying to add more than 3 performers to an album', async () => {
+    const newAlbum: AlbumEntity = await albumRepository.save({
+      nombre: faker.lorem.sentence(),
+      descripcion: faker.lorem.sentence(),
+      fechaLanzamiento: faker.date.past(),
+      caratula: faker.lorem.sentence(),
+    });
+  
+    const newPerformer1: PerformerEntity = await performerRepository.save({
+      nombre: faker.lorem.sentence(),
+      descripcion: faker.lorem.sentence(),
+      imagen: faker.lorem.sentence(),
+    });
+  
+    const newPerformer2: PerformerEntity = await performerRepository.save({
+      nombre: faker.lorem.sentence(),
+      descripcion: faker.lorem.sentence(),
+      imagen: faker.lorem.sentence(),
+    });
+  
+    const newPerformer3: PerformerEntity = await performerRepository.save({
+      nombre: faker.lorem.sentence(),
+      descripcion: faker.lorem.sentence(),
+      imagen: faker.lorem.sentence(),
+    });
+  
+    // Agregar tres intérpretes al álbum
+    await service.addPerformerAlbum(newAlbum.id, newPerformer1.id);
+    await service.addPerformerAlbum(newAlbum.id, newPerformer2.id);
+    await service.addPerformerAlbum(newAlbum.id, newPerformer3.id);
+  
+    // Intentar agregar un cuarto intérprete debería lanzar una excepción
+    const fourthPerformer: PerformerEntity = await performerRepository.save({
+      nombre: faker.lorem.sentence(),
+      descripcion: faker.lorem.sentence(),
+      imagen: faker.lorem.sentence(),
+    });
+  
+    await expect(() => service.addPerformerAlbum(newAlbum.id, fourthPerformer.id))
+      .rejects.toHaveProperty("message", "The album already has the maximum number of performers allowed");
+    });
+  
 
   it('findPerformerByAlbumIdPerformerId should return performer by album', async () => {
     const performer: PerformerEntity = performersList[0];
@@ -124,9 +167,9 @@ describe('AlbumPerformerService', () => {
 
   it('findPerformerByAlbumIdPerformerId should throw an exception for an performer not associated to the album', async () => {
     const newPerformer: PerformerEntity = await performerRepository.save({
-      nombre: faker.lorem.word(),
+      nombre: faker.lorem.sentence(),
       descripcion: faker.lorem.sentence(),
-      imagen: faker.image.url(),
+      imagen: faker.lorem.sentence(),
     });
 
     await expect(()=> service.findPerformerByAlbumIdPerformerId(album.id, newPerformer.id)).rejects.toHaveProperty("message", "The performer with the given id is not associated to the album"); 
@@ -144,9 +187,9 @@ describe('AlbumPerformerService', () => {
 
   it('associatePerformersAlbum should update performers list for a album', async () => {
     const newPerformer: PerformerEntity = await performerRepository.save({
-      nombre: faker.lorem.word(),
+      nombre: faker.lorem.sentence(),
       descripcion: faker.lorem.sentence(),
-      imagen: faker.image.url(),
+      imagen: faker.lorem.sentence(),
     });
 
     const updatedAlbum: AlbumEntity = await service.associatePerformersAlbum(album.id, [newPerformer]);
@@ -160,9 +203,9 @@ describe('AlbumPerformerService', () => {
 
   it('associatePerformersAlbum should throw an exception for an invalid album', async () => {
     const newPerformer: PerformerEntity = await performerRepository.save({
-      nombre: faker.lorem.word(),
+      nombre: faker.lorem.sentence(),
       descripcion: faker.lorem.sentence(),
-      imagen: faker.image.url(),
+      imagen: faker.lorem.sentence(),
     });
 
     await expect(()=> service.associatePerformersAlbum("0", [newPerformer])).rejects.toHaveProperty("message", "The album with the given id was not found"); 
@@ -197,9 +240,9 @@ describe('AlbumPerformerService', () => {
 
   it('deletePerformerToAlbum should thrown an exception for an non asocciated performer', async () => {
     const newPerformer: PerformerEntity = await performerRepository.save({
-      nombre: faker.lorem.word(),
+      nombre: faker.lorem.sentence(),
       descripcion: faker.lorem.sentence(),
-      imagen: faker.image.url(),
+      imagen: faker.lorem.sentence(),
     });
     await expect(()=> service.deletePerformerAlbum(album.id, newPerformer.id)).rejects.toHaveProperty("message", "The performer with the given id is not associated to the album"); 
   }); 
