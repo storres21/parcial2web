@@ -28,7 +28,7 @@ describe('PerformerService', () => {
   for(let i = 0; i < 5; i++){
       const performer: PerformerEntity = await repository.save({
       nombre: faker.lorem.sentence(), 
-      imagen: faker.lorem.sentence(),
+      imagen: faker.image.url(),
       descripcion: faker.lorem.sentence(),
       
       })
@@ -63,7 +63,7 @@ it('create should return a new performer', async () => {
   const performer: PerformerEntity = {
     id: "",
     nombre: faker.lorem.sentence(), 
-    imagen: faker.lorem.sentence(),
+    imagen: faker.image.url(),
     descripcion: faker.string.alphanumeric(10),
     albums: []
   }
@@ -82,7 +82,7 @@ it('create should throw an exception for an invalid performer', async () => {
   const performer: PerformerEntity = {
     id: "",
     nombre: faker.lorem.sentence(), 
-    imagen: faker.lorem.sentence(),
+    imagen: faker.image.url(),
     descripcion: faker.string.alphanumeric(101),
     albums: []
   }
@@ -92,7 +92,7 @@ it('create should throw an exception for an invalid performer', async () => {
 it('update should modify a performer', async () => {
   const performer: PerformerEntity = performersList[0];
   performer.nombre = "Nuevo nombre";
-  performer.imagen = faker.lorem.sentence();
+  performer.imagen = faker.image.url();
   performer.descripcion = faker.string.alphanumeric(100);
 
   const updatedPerformer: PerformerEntity = await service.update(performer.id, performer);
