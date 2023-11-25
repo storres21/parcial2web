@@ -5,11 +5,13 @@ import { TypeOrmTestingConfig } from '../shared/testing-utils/typeorm-testing-co
 import { TrackEntity } from './track.entity';
 import { TrackService } from './track.service';
 import { faker } from '@faker-js/faker';
+import { AlbumEntity } from '../album/album.entity';
 
 describe('TrackService', () => {
  let service: TrackService;
  let repository: Repository<TrackEntity>;
  let tracksList: TrackEntity[];
+ let repositoryAlbum: Repository<AlbumEntity>;
 
 
  beforeEach(async () => {
@@ -20,6 +22,7 @@ describe('TrackService', () => {
 
    service = module.get<TrackService>(TrackService);
    repository = module.get<Repository<TrackEntity>>(getRepositoryToken(TrackEntity));
+   repositoryAlbum = module.get<Repository<AlbumEntity>>(getRepositoryToken(AlbumEntity));
    await seedDatabase();
  },1000);
   
@@ -29,7 +32,7 @@ describe('TrackService', () => {
   for(let i = 0; i < 5; i++){
       const track: TrackEntity = await repository.save({
       nombre: faker.lorem.sentence(), 
-      duracion: 3
+      duracion: 1
       })
       tracksList.push(track);
   }
@@ -58,56 +61,64 @@ it('findOne should throw an exception for an invalid track', async () => {
 });
 
 it('create should return a new track', async () => {
+  const album: AlbumEntity = await repositoryAlbum.save({
+    nombre: faker.lorem.sentence(),
+    fechaLanzamiento: faker.date.past(),
+    descripcion: faker.lorem.sentence(),
+    caratula: faker.lorem.sentence(),
+    tracks: [],
+    performers: []
+  });
   const track: TrackEntity = {
     id: "",
-    nombre: faker.lorem.sentence(), 
+    nombre: faker.lorem.sentence(),
     duracion: 1,
-    album: null
+    album: album
   }
 
-  const newTrack: TrackEntity = await service.create(track);
+  const newTrack: TrackEntity = await service.create(album.id,track);
   expect(newTrack).not.toBeNull();
 
   const storedTrack: TrackEntity = await repository.findOne({where: {id: newTrack.id}})
-  expect(storedTrack).not.toBeNull();
-  expect(storedTrack.nombre).toEqual(newTrack.nombre)
-  expect(storedTrack.duracion).toEqual(newTrack.duracion)
+  expect(track).not.toBeNull();
+  expect(track.nombre).toEqual(storedTrack.nombre)
+  expect(track.duracion).toEqual(storedTrack.duracion)
 });
 
-// it('update should modify a track', async () => {
-//   const track: TrackEntity = tracksList[0];
-//   track.nombre = "Nuevo nombre";
-//   track.duracion = 1;
+it('update should modify a track', async () => {
+  const track: TrackEntity = tracksList[0];
+  track.nombre = "Nuevo nombre";
+  track.duracion = 1;
 
-//   const updatedTrack: TrackEntity = await service.update(track.id, track);
-//   expect(updatedTrack).not.toBeNull();
+  const updatedTrack: TrackEntity = await service.update(track.id, track);
+  expect(updatedTrack).not.toBeNull();
 
-//   const storedTrack: TrackEntity = await repository.findOne({ where: { id: track.id } })
-//   expect(storedTrack).not.toBeNull();
-//   expect(storedTrack.nombre).toEqual(track.nombre)
-//   expect(storedTrack.codigo).toEqual(track.codigo)
-// });
+  const storedTrack: TrackEntity = await repository.findOne({ where: { id: track.id } })
+  expect(storedTrack).not.toBeNull();
+  expect(storedTrack.nombre).toEqual(track.nombre)
+  expect(storedTrack.duracion).toEqual(track.duracion)
+});
 
-// it('update should throw an exception for an invalid track', async () => {
-//   let track: TrackEntity = tracksList[0];
-//   track = {
-//     ...track, nombre: "Nuevo nombre", codigo: "Nuevo codigo"
-//   }
-//   await expect(() => service.update("0", track)).rejects.toHaveProperty("message", "The track with the given id was not found")
-// });
+it('update should throw an exception for an invalid track', async () => {
+  let track: TrackEntity = tracksList[0];
+  track = {
+    ...track, nombre: "Nuevo nombre", duracion: 1
+  }
+  await expect(() => service.update("0", track)).rejects.toHaveProperty("message", "The track with the given id was not found")
+});
 
-// it('delete should remove a track', async () => {
-//   const track: TrackEntity = tracksList[0];
-//   await service.delete(track.id);
+it('delete should remove a track', async () => {
+  const track: TrackEntity = tracksList[0];
+  await service.delete(track.id);
 
-//   const deletedTrack: TrackEntity = await repository.findOne({ where: { id: track.id } })
-//   expect(deletedTrack).toBeNull();
-// });
+  const deletedTrack: TrackEntity = await repository.findOne({ where: { id: track.id } })
+  expect(deletedTrack).toBeNull();
+});
 
-// it('delete should throw an exception for an invalid track', async () => {
-//   const track: TrackEntity = tracksList[0];
-//   // await service.delete(track.id);
-//   await expect(() => service.delete("0")).rejects.toHaveProperty("message", "The track with the given id was not found")
-// });
+it('delete should throw an exception for an invalid track', async () => {
+  const track: TrackEntity = tracksList[0];
+  // await service.delete(track.id);
+  await expect(() => service.delete("0")).rejects.toHaveProperty("message", "The track with the given id was not found")
+});
 
 });

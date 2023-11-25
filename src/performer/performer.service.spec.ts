@@ -78,40 +78,41 @@ it('create should return a new performer', async () => {
   expect(storedPerformer.descripcion).toEqual(newPerformer.descripcion)
 });
 
-// it('update should modify a performer', async () => {
-//   const performer: PerformerEntity = performersList[0];
-//   performer.nombre = "Nuevo nombre";
-//   performer.duracion = 1;
+it('update should modify a performer', async () => {
+  const performer: PerformerEntity = performersList[0];
+  performer.nombre = "Nuevo nombre";
+  performer.imagen = faker.lorem.sentence();
+  performer.descripcion = faker.lorem.sentence();
 
-//   const updatedPerformer: PerformerEntity = await service.update(performer.id, performer);
-//   expect(updatedPerformer).not.toBeNull();
+  const updatedPerformer: PerformerEntity = await service.update(performer.id, performer);
+  expect(updatedPerformer).not.toBeNull();
 
-//   const storedPerformer: PerformerEntity = await repository.findOne({ where: { id: performer.id } })
-//   expect(storedPerformer).not.toBeNull();
-//   expect(storedPerformer.nombre).toEqual(performer.nombre)
-//   expect(storedPerformer.codigo).toEqual(performer.codigo)
-// });
+  const storedPerformer: PerformerEntity = await repository.findOne({ where: { id: performer.id } })
+  expect(storedPerformer).not.toBeNull();
+  expect(storedPerformer.nombre).toEqual(performer.nombre)
+  expect(storedPerformer.imagen).toEqual(performer.imagen)
+});
 
-// it('update should throw an exception for an invalid performer', async () => {
-//   let performer: PerformerEntity = performersList[0];
-//   performer = {
-//     ...performer, nombre: "Nuevo nombre", codigo: "Nuevo codigo"
-//   }
-//   await expect(() => service.update("0", performer)).rejects.toHaveProperty("message", "The performer with the given id was not found")
-// });
+it('update should throw an exception for an invalid performer', async () => {
+  let performer: PerformerEntity = performersList[0];
+  performer = {
+    ...performer, nombre: "Nuevo nombre", imagen: "Nueva imagen"
+  }
+  await expect(() => service.update("0", performer)).rejects.toHaveProperty("message", "The performer with the given id was not found")
+});
 
-// it('delete should remove a performer', async () => {
-//   const performer: PerformerEntity = performersList[0];
-//   await service.delete(performer.id);
+it('delete should remove a performer', async () => {
+  const performer: PerformerEntity = performersList[0];
+  await service.delete(performer.id);
 
-//   const deletedPerformer: PerformerEntity = await repository.findOne({ where: { id: performer.id } })
-//   expect(deletedPerformer).toBeNull();
-// });
+  const deletedPerformer: PerformerEntity = await repository.findOne({ where: { id: performer.id } })
+  expect(deletedPerformer).toBeNull();
+});
 
-// it('delete should throw an exception for an invalid performer', async () => {
-//   const performer: PerformerEntity = performersList[0];
-//   // await service.delete(performer.id);
-//   await expect(() => service.delete("0")).rejects.toHaveProperty("message", "The performer with the given id was not found")
-// });
+it('delete should throw an exception for an invalid performer', async () => {
+  const performer: PerformerEntity = performersList[0];
+  // await service.delete(performer.id);
+  await expect(() => service.delete("0")).rejects.toHaveProperty("message", "The performer with the given id was not found")
+});
 
 });

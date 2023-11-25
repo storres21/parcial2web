@@ -3,13 +3,16 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { BusinessError, BusinessLogicException } from '../shared/errors/business-errors';
 import { Repository } from 'typeorm';
 import { TrackEntity } from './track.entity';
+import { AlbumEntity } from '../album/album.entity';
 import { tr } from '@faker-js/faker';
 
 @Injectable()
 export class TrackService {
    constructor(
        @InjectRepository(TrackEntity)
-       private readonly trackRepository: Repository<TrackEntity>
+       private readonly trackRepository: Repository<TrackEntity>,
+       @InjectRepository(AlbumEntity)
+         private readonly albumRepository: Repository<AlbumEntity>,
    ){}
 
    async findAll(): Promise<TrackEntity[]> {
@@ -24,16 +27,32 @@ export class TrackService {
        return track;
    }
   
-   async create(track: TrackEntity): Promise<TrackEntity> {
-
-    if (track.duracion < 0) {
-        throw new BusinessLogicException("La duracion del track debe ser un numero positivo", BusinessError.VALIDATION_ERROR);
+   async create(albumId: string,track: TrackEntity): Promise<TrackEntity> {
+        
+    const album: AlbumEntity = await this.albumRepository.findOne({where: {id: albumId}, relations: ["tracks","performers"] } );
+    
+    if (!album)
+      throw new BusinessLogicException("The album with the given id was not found", BusinessError.NOT_FOUND);
+    if (track.duracion < 0){
+        throw new BusinessLogicException("The track's duration must be a positive number", BusinessError.BAD_REQUEST);
     }
-
     return await this.trackRepository.save(track);
 }
 
-   
+  async update(id: string, track: TrackEntity): Promise<TrackEntity> {
+    const persistedTrack: TrackEntity = await this.trackRepository.findOne({where:{id}});
+    if (!persistedTrack)
+      throw new BusinessLogicException("The track with the given id was not found", BusinessError.NOT_FOUND);
+    track.id = id; 
+    return await this.trackRepository.save(track);
+}
 
+async delete(id: string) {
+    const track: TrackEntity = await this.trackRepository.findOne({where:{id}});
+    if (!track)
+      throw new BusinessLogicException("The track with the given id was not found", BusinessError.NOT_FOUND);
+ 
+    await this.trackRepository.remove(track);
+}
 
 }

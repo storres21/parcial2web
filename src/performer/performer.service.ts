@@ -29,4 +29,21 @@ export class PerformerService {
 }
 
 
+async update(id: string, performer: PerformerEntity): Promise<PerformerEntity> {
+    const persistedPerformer: PerformerEntity = await this.performerRepository.findOne({where:{id}});
+    if (!persistedPerformer)
+      throw new BusinessLogicException("The performer with the given id was not found", BusinessError.NOT_FOUND);
+    performer.id = id; 
+    return await this.performerRepository.save(performer);
+}
+
+async delete(id: string) {
+    const performer: PerformerEntity = await this.performerRepository.findOne({where:{id}});
+    if (!performer)
+      throw new BusinessLogicException("The performer with the given id was not found", BusinessError.NOT_FOUND);
+ 
+    await this.performerRepository.remove(performer);
+}
+
+
 }
