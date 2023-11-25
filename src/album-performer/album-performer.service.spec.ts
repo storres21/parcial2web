@@ -37,7 +37,7 @@ describe('AlbumPerformerService', () => {
         const performer: PerformerEntity = await performerRepository.save({
           nombre: faker.lorem.sentence(),
           descripcion: faker.lorem.sentence(),
-          imagen: faker.lorem.sentence(),
+          imagen: faker.image.url(),
         })
         performersList.push(performer);
     }
@@ -59,7 +59,7 @@ describe('AlbumPerformerService', () => {
     const newPerformer: PerformerEntity = await performerRepository.save({
       nombre: faker.lorem.sentence(),
       descripcion: faker.lorem.sentence(),
-      imagen: faker.lorem.sentence(),
+      imagen: faker.image.url(),
     });
     
 
@@ -96,7 +96,7 @@ describe('AlbumPerformerService', () => {
     const newPerformer: PerformerEntity = await performerRepository.save({
       nombre: faker.lorem.sentence(),
       descripcion: faker.lorem.sentence(),
-      imagen: faker.lorem.sentence(),
+      imagen: faker.image.url(),
     });
 
     await expect(() => service.addPerformerAlbum("0", newPerformer.id)).rejects.toHaveProperty("message", "The album with the given id was not found");
@@ -113,19 +113,19 @@ describe('AlbumPerformerService', () => {
     const newPerformer1: PerformerEntity = await performerRepository.save({
       nombre: faker.lorem.sentence(),
       descripcion: faker.lorem.sentence(),
-      imagen: faker.lorem.sentence(),
+      imagen: faker.image.url(),
     });
   
     const newPerformer2: PerformerEntity = await performerRepository.save({
       nombre: faker.lorem.sentence(),
       descripcion: faker.lorem.sentence(),
-      imagen: faker.lorem.sentence(),
+      imagen: faker.image.url(),
     });
   
     const newPerformer3: PerformerEntity = await performerRepository.save({
       nombre: faker.lorem.sentence(),
       descripcion: faker.lorem.sentence(),
-      imagen: faker.lorem.sentence(),
+      imagen: faker.image.url(),
     });
   
     // Agregar tres intérpretes al álbum
@@ -137,7 +137,7 @@ describe('AlbumPerformerService', () => {
     const fourthPerformer: PerformerEntity = await performerRepository.save({
       nombre: faker.lorem.sentence(),
       descripcion: faker.lorem.sentence(),
-      imagen: faker.lorem.sentence(),
+      imagen: faker.image.url(),
     });
   
     await expect(() => service.addPerformerAlbum(newAlbum.id, fourthPerformer.id))

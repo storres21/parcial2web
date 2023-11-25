@@ -29,7 +29,7 @@ describe('AlbumService', () => {
   for(let i = 0; i < 5; i++){
       const album: AlbumEntity = await repository.save({
       nombre: faker.lorem.sentence(), 
-      caratula: faker.lorem.sentence(),
+      caratula: faker.image.url(),
       fechaLanzamiento: faker.date.past(),
       descripcion: faker.lorem.sentence(),
       
@@ -67,7 +67,7 @@ it('create should return a new album', async () => {
   const album: AlbumEntity = {
     id: "",
     nombre: faker.lorem.sentence(), 
-    caratula: faker.lorem.sentence(),
+    caratula: faker.image.url(),
     fechaLanzamiento: faker.date.past(),
     descripcion: faker.lorem.sentence(),
     tracks: [],
@@ -89,7 +89,7 @@ it('create should not create a album with an empty name', async () => {
   const album: AlbumEntity = {
     id: "",
     nombre: "", 
-    caratula: faker.lorem.sentence(),
+    caratula: faker.image.url(),
     fechaLanzamiento: faker.date.past(),
     descripcion: faker.lorem.sentence(),
     tracks: [],
@@ -103,7 +103,7 @@ it('create should not create a album with an empty description', async () => {
   const album: AlbumEntity = {
     id: "",
     nombre: faker.lorem.sentence(), 
-    caratula: faker.lorem.sentence(),
+    caratula: faker.image.url(),
     fechaLanzamiento: faker.date.past(),
     descripcion: "",
     tracks: [],
