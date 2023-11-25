@@ -46,7 +46,7 @@ export class AlbumService {
         if (!album)
           throw new BusinessLogicException("The album with the given id was not found", BusinessError.NOT_FOUND);
 
-        // Verifica si el álbum tiene pistas asociadas
+       
         if (album.tracks && album.tracks.length > 0) {
             throw new BusinessLogicException("Cannot delete the album because it has associated tracks", BusinessError.INVALID_OPERATION);
         }

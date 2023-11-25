@@ -9,6 +9,7 @@ import { AlbumPerformerModule } from './album-performer/album-performer.module';
 import { AlbumEntity } from './album/album.entity';
 import { PerformerEntity } from './performer/performer.entity';
 import { TrackEntity } from './track/track.entity';
+import { AlbumPerformerController } from './album-performer/album-performer.controller';
 
 
 
@@ -20,16 +21,12 @@ import { TrackEntity } from './track/track.entity';
       port: 5432,
       username: 'postgres',
       password: 'postgres',
-      database: 'aeropuerto',
-      entities: [PerformerModule, AlbumModule, TrackModule],
+      database: 'album',
+      entities: [PerformerEntity, AlbumEntity, TrackEntity],
       dropSchema: true,
       synchronize: true,
       keepConnectionAlive: true
     }),
-    // AerolineaAeropuertoModule,
-    // AlbumModule,
-    // TrackModule,
-    // PerformerModule,
     AlbumPerformerModule,
 
   

@@ -26,7 +26,7 @@ export class AlbumPerformerService {
 
         
         if (album.performers && album.performers.length >= 3) {
-            throw new BusinessLogicException("The album already has the maximum number of performers allowed", BusinessError.VALIDATION_ERROR);
+            throw new BusinessLogicException("The album already has the maximum number of performers allowed", BusinessError.BAD_REQUEST);
         }
    
        album.performers = [...album.performers, performer];

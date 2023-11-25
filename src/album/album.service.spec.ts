@@ -158,7 +158,7 @@ it('delete should throw an error when trying to remove an album with associated 
     await service.delete(albumWithTracks.id);
   } catch (error) {
     expect(error.message).toBe("Cannot delete the album because it has associated tracks");
-    expect(error.code).toBe(BusinessError.INVALID_OPERATION); // Puedes ajustar esto según tu implementación
+    expect(error.code).toBe(BusinessError.INVALID_OPERATION); 
   }
 });
 

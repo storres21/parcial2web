@@ -1,0 +1,1340 @@
+{
+	"info": {
+		"_postman_id": "7d2c25be-2841-4c92-bd09-b2f0da41e20e",
+		"name": "albums-performers",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "30863464",
+		"_collection_link": "https://restless-resonance-471559.postman.co/workspace/Team-Workspace~64f4cd2e-1b08-4e3f-8087-048f9192a463/collection/30863464-7d2c25be-2841-4c92-bd09-b2f0da41e20e?action=share&source=collection_link&creator=30863464"
+	},
+	"item": [
+		{
+			"name": "Crear un performer a un album",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 201\", function () {",
+							"    pm.response.to.have.status(201);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3000/api/v1/albums/de26bcdc-2266-4e06-a680-52f96f22fd25/performers/b72cc280-3236-4a7a-bcfd-440915d4f517",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"v1",
+						"albums",
+						"de26bcdc-2266-4e06-a680-52f96f22fd25",
+						"performers",
+						"b72cc280-3236-4a7a-bcfd-440915d4f517"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Crear un performer a un album",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"direccion\":\"cra 5 # 23\",\n    \"descripcion\":\"recoger en portería\",\n    \"fecha\":\"12-12-12\",\n    \"hora\":\"12:12\",\n    \"usuario\": 1,\n    \"recolector\":null,\n    \"zona\":null,\n    \"desecho\":null\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/api/v1/albums/f8a179f3-8403-4c19-b9bc-90104f4b7e75/performers/ce30ef70-6c1b-432d-afdb-964ae735dc74",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"v1",
+								"albums",
+								"f8a179f3-8403-4c19-b9bc-90104f4b7e75",
+								"performers",
+								"ce30ef70-6c1b-432d-afdb-964ae735dc74"
+							]
+						}
+					},
+					"status": "Created",
+					"code": 201,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json",
+							"name": "Content-Type",
+							"description": "",
+							"type": "text"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"id\": \"f8a179f3-8403-4c19-b9bc-90104f4b7e75\",\n    \"nombre\": \"midnights\",\n    \"caratula\": \"www.midnights.com\",\n    \"fechaLanzamiento\": \"2012-12-12T05:00:00.000Z\",\n    \"descripcion\": \"el mejor album de la historia\",\n    \"performers\": [\n        {\n            \"id\": \"ce30ef70-6c1b-432d-afdb-964ae735dc74\",\n            \"nombre\": \"taylor swift\",\n            \"imagen\": \"www.reina.com\",\n            \"descripcion\": \"la mejor cantante\"\n        }\n    ]\n}"
+				}
+			]
+		},
+		{
+			"name": "Agregar más de 3 performers a un album",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 404\", function () {",
+							"    pm.response.to.have.status(400);",
+							"});",
+							"",
+							"pm.test(\"Get expected error message\", function () {",
+							"    var data = pm.response.json();",
+							"    pm.expect(data.message).to.eql(\"The album already has the maximum number of performers allowed\");",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3000/api/v1/albums/de26bcdc-2266-4e06-a680-52f96f22fd25/performers/31d00a2d-a4e9-45a3-8759-81d171d13f2b",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"v1",
+						"albums",
+						"de26bcdc-2266-4e06-a680-52f96f22fd25",
+						"performers",
+						"31d00a2d-a4e9-45a3-8759-81d171d13f2b"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Crear un performer a un album",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"direccion\":\"cra 5 # 23\",\n    \"descripcion\":\"recoger en portería\",\n    \"fecha\":\"12-12-12\",\n    \"hora\":\"12:12\",\n    \"usuario\": 1,\n    \"recolector\":null,\n    \"zona\":null,\n    \"desecho\":null\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/api/v1/albums/f8a179f3-8403-4c19-b9bc-90104f4b7e75/performers/ce30ef70-6c1b-432d-afdb-964ae735dc74",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"v1",
+								"albums",
+								"f8a179f3-8403-4c19-b9bc-90104f4b7e75",
+								"performers",
+								"ce30ef70-6c1b-432d-afdb-964ae735dc74"
+							]
+						}
+					},
+					"status": "Created",
+					"code": 201,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json",
+							"name": "Content-Type",
+							"description": "",
+							"type": "text"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"id\": \"f8a179f3-8403-4c19-b9bc-90104f4b7e75\",\n    \"nombre\": \"midnights\",\n    \"caratula\": \"www.midnights.com\",\n    \"fechaLanzamiento\": \"2012-12-12T05:00:00.000Z\",\n    \"descripcion\": \"el mejor album de la historia\",\n    \"performers\": [\n        {\n            \"id\": \"ce30ef70-6c1b-432d-afdb-964ae735dc74\",\n            \"nombre\": \"taylor swift\",\n            \"imagen\": \"www.reina.com\",\n            \"descripcion\": \"la mejor cantante\"\n        }\n    ]\n}"
+				}
+			]
+		},
+		{
+			"name": "Agregar un perfomer inválido a un album",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 404\", function () {",
+							"    pm.response.to.have.status(404);",
+							"});",
+							"",
+							"pm.test(\"Get expected error message\", function () {",
+							"    var data = pm.response.json();",
+							"    pm.expect(data.message).to.eql(\"The performer with the given id was not found\");",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/api/v1/albums/f8a179f3-8403-4c19-b9bc-90104f4b7e75/performers/00000000-0000-0000-0000-000000000000",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"v1",
+						"albums",
+						"f8a179f3-8403-4c19-b9bc-90104f4b7e75",
+						"performers",
+						"00000000-0000-0000-0000-000000000000"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Agregar un performer inválido a un album",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/api/v1/albums/f8a179f3-8403-4c19-b9bc-90104f4b7e75/performers/00000000-0000-0000-0000-000000000000",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"v1",
+								"albums",
+								"f8a179f3-8403-4c19-b9bc-90104f4b7e75",
+								"performers",
+								"00000000-0000-0000-0000-000000000000"
+							]
+						}
+					},
+					"status": "Not Found",
+					"code": 404,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json",
+							"name": "Content-Type",
+							"description": "",
+							"type": "text"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"statusCode\": 404,\n    \"message\": \"The performer with the given id was not found\"\n}"
+				}
+			]
+		},
+		{
+			"name": "Agregar un performer a un usuario album",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 404\", function () {",
+							"    pm.response.to.have.status(404);",
+							"});",
+							"",
+							"pm.test(\"Get expected error message\", function () {",
+							"    var data = pm.response.json();",
+							"    pm.expect(data.message).to.eql(\"The album with the given id was not found\");",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3000/api/v1/albums/00000000-0000-0000-0000-000000000000/performers/ce30ef70-6c1b-432d-afdb-964ae735dc74",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"v1",
+						"albums",
+						"00000000-0000-0000-0000-000000000000",
+						"performers",
+						"ce30ef70-6c1b-432d-afdb-964ae735dc74"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Agregar un performer a un album invalido",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/api/v1/albums/00000000-0000-0000-0000-000000000000/performers/ce30ef70-6c1b-432d-afdb-964ae735dc74",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"v1",
+								"albums",
+								"00000000-0000-0000-0000-000000000000",
+								"performers",
+								"ce30ef70-6c1b-432d-afdb-964ae735dc74"
+							]
+						}
+					},
+					"status": "Not Found",
+					"code": 404,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json",
+							"name": "Content-Type",
+							"description": "",
+							"type": "text"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"statusCode\": 404,\n    \"message\": \"The album with the given id was not found\"\n}"
+				}
+			]
+		},
+		{
+			"name": "Obtener el performer de un album",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3000/api/v1/albums/7cc620a4-fbe2-4d61-b715-fce7d4b33cda/performers/971a5109-0570-45a0-8711-ebbf4072e75a",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"v1",
+						"albums",
+						"7cc620a4-fbe2-4d61-b715-fce7d4b33cda",
+						"performers",
+						"971a5109-0570-45a0-8711-ebbf4072e75a"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Obtener el performer de un museo",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/api/v1/albums/7cc620a4-fbe2-4d61-b715-fce7d4b33cda/performers/971a5109-0570-45a0-8711-ebbf4072e75a",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"v1",
+								"albums",
+								"7cc620a4-fbe2-4d61-b715-fce7d4b33cda",
+								"performers",
+								"971a5109-0570-45a0-8711-ebbf4072e75a"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json",
+							"name": "Content-Type",
+							"description": "",
+							"type": "text"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"id\": \"971a5109-0570-45a0-8711-ebbf4072e75a\",\n    \"nombre\": \"taylor swift\",\n    \"imagen\": \"www.reina.com\",\n    \"descripcion\": \"la mejor cantante\"\n}"
+				}
+			]
+		},
+		{
+			"name": "Obtener un performer invalida de un album",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 404\", function () {",
+							"    pm.response.to.have.status(404);",
+							"});",
+							"",
+							"pm.test(\"Get expected error message\", function () {",
+							"    var data = pm.response.json();",
+							"    pm.expect(data.message).to.eql(\"The performer with the given id was not found\");",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3000/api/v1/albums/7cc620a4-fbe2-4d61-b715-fce7d4b33cda/performers/00000000-0000-0000-0000-000000000000",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"v1",
+						"albums",
+						"7cc620a4-fbe2-4d61-b715-fce7d4b33cda",
+						"performers",
+						"00000000-0000-0000-0000-000000000000"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Obtener un performer invalido de un museo",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/api/v1/albums/7cc620a4-fbe2-4d61-b715-fce7d4b33cda/performers/00000000-0000-0000-0000-000000000000",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"v1",
+								"albums",
+								"7cc620a4-fbe2-4d61-b715-fce7d4b33cda",
+								"performers",
+								"00000000-0000-0000-0000-000000000000"
+							]
+						}
+					},
+					"status": "Not Found",
+					"code": 404,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json",
+							"name": "Content-Type",
+							"description": "",
+							"type": "text"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"statusCode\": 404,\n    \"message\": \"The performer with the given id was not found\"\n}\n\n"
+				}
+			]
+		},
+		{
+			"name": "Obtener un performer de un museo invalido",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 404\", function () {",
+							"    pm.response.to.have.status(404);",
+							"});",
+							"",
+							"pm.test(\"Get expected error message\", function () {",
+							"    var data = pm.response.json();",
+							"    pm.expect(data.message).to.eql(\"The album with the given id was not found\");",
+							"});",
+							"",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3000/api/v1/albums/00000000-0000-0000-0000-000000000000/performers/971a5109-0570-45a0-8711-ebbf4072e75a",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"v1",
+						"albums",
+						"00000000-0000-0000-0000-000000000000",
+						"performers",
+						"971a5109-0570-45a0-8711-ebbf4072e75a"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Obtener un performer de un album invalido",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/api/v1/albums/00000000-0000-0000-0000-000000000000/performers/971a5109-0570-45a0-8711-ebbf4072e75a",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"v1",
+								"albums",
+								"00000000-0000-0000-0000-000000000000",
+								"performers",
+								"971a5109-0570-45a0-8711-ebbf4072e75a"
+							]
+						}
+					},
+					"status": "Not Found",
+					"code": 404,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json",
+							"name": "Content-Type",
+							"description": "",
+							"type": "text"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"statusCode\": 404,\n    \"message\": \"The album with the given id was not found\"\n}"
+				}
+			]
+		},
+		{
+			"name": "Obtener un performer no asociada a un museo",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 412\", function () {",
+							"    pm.response.to.have.status(412);",
+							"});",
+							"",
+							"pm.test(\"Get expected error message\", function () {",
+							"    var data = pm.response.json();",
+							"    pm.expect(data.message).to.eql(\"The performer with the given id is not associated to the album\");",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3000/api/v1/albums/7cc620a4-fbe2-4d61-b715-fce7d4b33cda/performers/71af10a8-8f14-4e3e-a91c-63bbe9fdd9f4",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"v1",
+						"albums",
+						"7cc620a4-fbe2-4d61-b715-fce7d4b33cda",
+						"performers",
+						"71af10a8-8f14-4e3e-a91c-63bbe9fdd9f4"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Obtener un performer no asociada a un album",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/api/v1/albums/7cc620a4-fbe2-4d61-b715-fce7d4b33cda/performers/71af10a8-8f14-4e3e-a91c-63bbe9fdd9f4",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"v1",
+								"albums",
+								"7cc620a4-fbe2-4d61-b715-fce7d4b33cda",
+								"performers",
+								"71af10a8-8f14-4e3e-a91c-63bbe9fdd9f4"
+							]
+						}
+					},
+					"status": "Precondition Failed",
+					"code": 412,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json",
+							"name": "Content-Type",
+							"description": "",
+							"type": "text"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"statusCode\": 412,\n    \"message\": \"The performer with the given id is not associated to the album\"\n}"
+				}
+			]
+		},
+		{
+			"name": "Obtener todas los performers de un album",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3000/api/v1/albums/7cc620a4-fbe2-4d61-b715-fce7d4b33cda/performers",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"v1",
+						"albums",
+						"7cc620a4-fbe2-4d61-b715-fce7d4b33cda",
+						"performers"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Obtener todos los performers de un album",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/api/v1/albums/7cc620a4-fbe2-4d61-b715-fce7d4b33cda/performers",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"v1",
+								"albums",
+								"7cc620a4-fbe2-4d61-b715-fce7d4b33cda",
+								"performers"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json",
+							"name": "Content-Type",
+							"description": "",
+							"type": "text"
+						}
+					],
+					"cookie": [],
+					"body": "[\n    {\n        \"id\": \"971a5109-0570-45a0-8711-ebbf4072e75a\",\n        \"nombre\": \"taylor swift\",\n        \"imagen\": \"www.reina.com\",\n        \"descripcion\": \"la mejor cantante\"\n    },\n    {\n        \"id\": \"a47c8c86-84ed-4b5f-a001-3628a8a1c80a\",\n        \"nombre\": \"taylor swift\",\n        \"imagen\": \"www.reina.com\",\n        \"descripcion\": \"la mejor cantante\"\n    },\n    {\n        \"id\": \"d0d0fdb7-cdcc-46d3-83c8-dabd10d6dc2b\",\n        \"nombre\": \"taylor swift\",\n        \"imagen\": \"www.reina.com\",\n        \"descripcion\": \"la mejor cantante\"\n    }\n]"
+				}
+			]
+		},
+		{
+			"name": "Obtener todas los performers de un album invalido",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 404\", function () {",
+							"    pm.response.to.have.status(404);",
+							"});",
+							"",
+							"pm.test(\"Get expected error message\", function () {",
+							"    var data = pm.response.json();",
+							"    pm.expect(data.message).to.eql(\"The album with the given id was not found\");",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3000/api/v1/albums/00000000-0000-0000-0000-000000000000/performers",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"v1",
+						"albums",
+						"00000000-0000-0000-0000-000000000000",
+						"performers"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Obtener todas los performers de un album invalido",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/api/v1/albums/00000000-0000-0000-0000-000000000000/performers",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"v1",
+								"albums",
+								"00000000-0000-0000-0000-000000000000",
+								"performers"
+							]
+						}
+					},
+					"status": "Not Found",
+					"code": 404,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json",
+							"name": "Content-Type",
+							"description": "",
+							"type": "text"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"statusCode\": 404,\n    \"message\": \"The album with the given id was not found\"\n}"
+				}
+			]
+		},
+		{
+			"name": "Actualizar los performers de un album",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 201\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "[\n    {\n        \"id\": \"971a5109-0570-45a0-8711-ebbf4072e75a\",\n        \"nombre\": \"taylor swift\",\n        \"imagen\": \"www.reina.com.co\",\n        \"descripcion\": \"la mejor cantante\"\n    },\n    {\n        \"id\": \"a47c8c86-84ed-4b5f-a001-3628a8a1c80a\",\n        \"nombre\": \"taylor swift\",\n        \"imagen\": \"www.reina.com.es\",\n        \"descripcion\": \"la mejor cantante\"\n    },\n    {\n        \"id\": \"d0d0fdb7-cdcc-46d3-83c8-dabd10d6dc2b\",\n        \"nombre\": \"taylor swift\",\n        \"imagen\": \"www.reina.com.dk\",\n        \"descripcion\": \"la mejor cantante\"\n    }\n]",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/api/v1/albums/7cc620a4-fbe2-4d61-b715-fce7d4b33cda/performers",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"v1",
+						"albums",
+						"7cc620a4-fbe2-4d61-b715-fce7d4b33cda",
+						"performers"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Actualizar los performers de un album",
+					"originalRequest": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "[\n    {\n        \"id\": \"971a5109-0570-45a0-8711-ebbf4072e75a\",\n        \"nombre\": \"taylor swift\",\n        \"imagen\": \"www.reina.com.co\",\n        \"descripcion\": \"la mejor cantante\"\n    },\n    {\n        \"id\": \"a47c8c86-84ed-4b5f-a001-3628a8a1c80a\",\n        \"nombre\": \"taylor swift\",\n        \"imagen\": \"www.reina.com.es\",\n        \"descripcion\": \"la mejor cantante\"\n    },\n    {\n        \"id\": \"d0d0fdb7-cdcc-46d3-83c8-dabd10d6dc2b\",\n        \"nombre\": \"taylor swift\",\n        \"imagen\": \"www.reina.com.dk\",\n        \"descripcion\": \"la mejor cantante\"\n    }\n]",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/api/v1/albums/7cc620a4-fbe2-4d61-b715-fce7d4b33cda/performers",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"v1",
+								"albums",
+								"7cc620a4-fbe2-4d61-b715-fce7d4b33cda",
+								"performers"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json",
+							"name": "Content-Type",
+							"description": "",
+							"type": "text"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"id\": \"7cc620a4-fbe2-4d61-b715-fce7d4b33cda\",\n    \"nombre\": \"midnights\",\n    \"caratula\": \"www.midnights.com\",\n    \"fechaLanzamiento\": \"2012-12-12T05:00:00.000Z\",\n    \"descripcion\": \"el mejor album de la historia\",\n    \"performers\": [\n        {\n            \"id\": \"971a5109-0570-45a0-8711-ebbf4072e75a\",\n            \"nombre\": \"taylor swift\",\n            \"imagen\": \"www.reina.com.co\",\n            \"descripcion\": \"la mejor cantante\"\n        },\n        {\n            \"id\": \"a47c8c86-84ed-4b5f-a001-3628a8a1c80a\",\n            \"nombre\": \"taylor swift\",\n            \"imagen\": \"www.reina.com.es\",\n            \"descripcion\": \"la mejor cantante\"\n        },\n        {\n            \"id\": \"d0d0fdb7-cdcc-46d3-83c8-dabd10d6dc2b\",\n            \"nombre\": \"taylor swift\",\n            \"imagen\": \"www.reina.com.dk\",\n            \"descripcion\": \"la mejor cantante\"\n        }\n    ]\n}"
+				}
+			]
+		},
+		{
+			"name": "Actualizar performers invalidos de un album",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 404\", function () {",
+							"    pm.response.to.have.status(404);",
+							"});",
+							"",
+							"pm.test(\"Get expected error message\", function () {",
+							"    var data = pm.response.json();",
+							"    pm.expect(data.message).to.eql(\"The performer with the given id was not found\");",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "[\n    {\n        \"id\": \"00000000-0000-0000-0000-000000000000\"\n        \n    }\n]",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/api/v1/albums/7cc620a4-fbe2-4d61-b715-fce7d4b33cda/performers",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"v1",
+						"albums",
+						"7cc620a4-fbe2-4d61-b715-fce7d4b33cda",
+						"performers"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Actualizar performers invalidos de un album",
+					"originalRequest": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "[\n    {\n        \"id\": \"00000000-0000-0000-0000-000000000000\"\n        \n    }\n]",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/api/v1/albums/7cc620a4-fbe2-4d61-b715-fce7d4b33cda/performers",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"v1",
+								"albums",
+								"7cc620a4-fbe2-4d61-b715-fce7d4b33cda",
+								"performers"
+							]
+						}
+					},
+					"status": "Not Found",
+					"code": 404,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json",
+							"name": "Content-Type",
+							"description": "",
+							"type": "text"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"statusCode\": 404,\n    \"message\": \"The performer with the given id was not found\"\n}"
+				}
+			]
+		},
+		{
+			"name": "Actualizar los performers de un album invalido",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 404\", function () {",
+							"    pm.response.to.have.status(404);",
+							"});",
+							"",
+							"pm.test(\"Get expected error message\", function () {",
+							"    var data = pm.response.json();",
+							"    pm.expect(data.message).to.eql(\"The album with the given id was not found\");",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "[\n    {\n        \"id\": \"971a5109-0570-45a0-8711-ebbf4072e75a\",\n        \"nombre\": \"taylor swift\",\n        \"imagen\": \"www.reina.com.co\",\n        \"descripcion\": \"la mejor cantante siempre\"\n    }\n]",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/api/v1/albums/00000000-0000-0000-0000-000000000000/performers",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"v1",
+						"albums",
+						"00000000-0000-0000-0000-000000000000",
+						"performers"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Actualizar los performers de un album invalido",
+					"originalRequest": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "[\n    {\n        \"id\": \"971a5109-0570-45a0-8711-ebbf4072e75a\",\n        \"nombre\": \"taylor swift\",\n        \"imagen\": \"www.reina.com.co\",\n        \"descripcion\": \"la mejor cantante siempre\"\n    }\n]",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/api/v1/albums/00000000-0000-0000-0000-000000000000/performers",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"v1",
+								"albums",
+								"00000000-0000-0000-0000-000000000000",
+								"performers"
+							]
+						}
+					},
+					"status": "Not Found",
+					"code": 404,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json",
+							"name": "Content-Type",
+							"description": "",
+							"type": "text"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"statusCode\": 404,\n    \"message\": \"The usuario with the given id was not found\"\n}"
+				}
+			]
+		},
+		{
+			"name": "Eliminar un performer de un album",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 204\", function () {",
+							"    pm.response.to.have.status(204);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3000/api/v1/albums/7cc620a4-fbe2-4d61-b715-fce7d4b33cda/performers/971a5109-0570-45a0-8711-ebbf4072e75a",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"v1",
+						"albums",
+						"7cc620a4-fbe2-4d61-b715-fce7d4b33cda",
+						"performers",
+						"971a5109-0570-45a0-8711-ebbf4072e75a"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Eliminar un performer de un album",
+					"originalRequest": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/api/v1/albums/7cc620a4-fbe2-4d61-b715-fce7d4b33cda/performers/971a5109-0570-45a0-8711-ebbf4072e75a",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"v1",
+								"albums",
+								"7cc620a4-fbe2-4d61-b715-fce7d4b33cda",
+								"performers",
+								"971a5109-0570-45a0-8711-ebbf4072e75a"
+							]
+						}
+					},
+					"status": "No Content",
+					"code": 204,
+					"_postman_previewlanguage": null,
+					"header": null,
+					"cookie": [],
+					"body": null
+				}
+			]
+		},
+		{
+			"name": "Eliminar un performer de un album invalido",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 404\", function () {",
+							"    pm.response.to.have.status(404);",
+							"});",
+							"",
+							"pm.test(\"Get expected error message\", function () {",
+							"    var data = pm.response.json();",
+							"    pm.expect(data.message).to.eql(\"The album with the given id was not found\");",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3000/api/v1/albums/00000000-0000-0000-0000-000000000000/performers/a47c8c86-84ed-4b5f-a001-3628a8a1c80a",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"v1",
+						"albums",
+						"00000000-0000-0000-0000-000000000000",
+						"performers",
+						"a47c8c86-84ed-4b5f-a001-3628a8a1c80a"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Eliminar un performer de un album invalido",
+					"originalRequest": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/api/v1/albums/00000000-0000-0000-0000-000000000000/performers/a47c8c86-84ed-4b5f-a001-3628a8a1c80a",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"v1",
+								"albums",
+								"00000000-0000-0000-0000-000000000000",
+								"performers",
+								"a47c8c86-84ed-4b5f-a001-3628a8a1c80a"
+							]
+						}
+					},
+					"status": "Not Found",
+					"code": 404,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json",
+							"name": "Content-Type",
+							"description": "",
+							"type": "text"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"statusCode\": 404,\n    \"message\": \"The album with the given id was not found\"\n}"
+				}
+			]
+		},
+		{
+			"name": "Eliminar solicitud invalida a un usuario",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 404\", function () {",
+							"    pm.response.to.have.status(404);",
+							"});",
+							"",
+							"pm.test(\"Get expected error message\", function () {",
+							"    var data = pm.response.json();",
+							"    pm.expect(data.message).to.eql(\"The performer with the given id was not found\");",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3000/api/v1/albums/7cc620a4-fbe2-4d61-b715-fce7d4b33cda/performers/00000000-0000-0000-0000-000000000000",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"v1",
+						"albums",
+						"7cc620a4-fbe2-4d61-b715-fce7d4b33cda",
+						"performers",
+						"00000000-0000-0000-0000-000000000000"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Eliminar solicitud invalida a un usuario",
+					"originalRequest": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/api/v1/albums/7cc620a4-fbe2-4d61-b715-fce7d4b33cda/performers/00000000-0000-0000-0000-000000000000",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"v1",
+								"albums",
+								"7cc620a4-fbe2-4d61-b715-fce7d4b33cda",
+								"performers",
+								"00000000-0000-0000-0000-000000000000"
+							]
+						}
+					},
+					"status": "Not Found",
+					"code": 404,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json",
+							"name": "Content-Type",
+							"description": "",
+							"type": "text"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"statusCode\": 404,\n    \"message\": \"The performer with the given id was not found\"\n}"
+				}
+			]
+		}
+	]
+}

@@ -46,7 +46,7 @@ describe('AlbumPerformerService', () => {
       nombre: faker.lorem.sentence(),
       descripcion: faker.lorem.sentence(),
       fechaLanzamiento: faker.date.past(),
-      caratula: faker.lorem.sentence(),
+      caratula: faker.image.url(),
       performers: performersList
     })
   }
@@ -67,7 +67,7 @@ describe('AlbumPerformerService', () => {
       nombre: faker.lorem.sentence(),
       descripcion: faker.lorem.sentence(),
       fechaLanzamiento: faker.date.past(),
-      caratula: faker.lorem.sentence(),
+      caratula: faker.image.url(),
     });
 
 
@@ -86,7 +86,7 @@ describe('AlbumPerformerService', () => {
       nombre: faker.lorem.sentence(),
       descripcion: faker.lorem.sentence(),
       fechaLanzamiento: faker.date.past(),
-      caratula: faker.lorem.sentence(),
+      caratula: faker.image.url(),
     })
 
     await expect(() => service.addPerformerAlbum(newAlbum.id, "0")).rejects.toHaveProperty("message", "The performer with the given id was not found");
@@ -107,7 +107,7 @@ describe('AlbumPerformerService', () => {
       nombre: faker.lorem.sentence(),
       descripcion: faker.lorem.sentence(),
       fechaLanzamiento: faker.date.past(),
-      caratula: faker.lorem.sentence(),
+      caratula: faker.image.url(),
     });
   
     const newPerformer1: PerformerEntity = await performerRepository.save({
@@ -217,6 +217,7 @@ describe('AlbumPerformerService', () => {
 
     await expect(()=> service.associatePerformersAlbum(album.id, [newPerformer])).rejects.toHaveProperty("message", "The performer with the given id was not found"); 
   });
+
 
   it('deletePerformerToAlbum should remove an performer from a album', async () => {
     const performer: PerformerEntity = performersList[0];
